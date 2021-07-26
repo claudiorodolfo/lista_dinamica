@@ -17,7 +17,7 @@ public class ListaDinamica implements Listavel {
 	}
 
 	//anexar
-	public void anexar(Object dado){
+	public void anexar(Object dado) throws Exception{
 		if(!estaCheia()) {
 			NoDuplo noTemporario = new NoDuplo();
 			noTemporario.setDado(dado);
@@ -31,13 +31,13 @@ public class ListaDinamica implements Listavel {
 
 			quantidade++;
 		} else {
-			System.out.println("Fila Cheia!");
+			throw new MyException("Fila Cheia!");
 		}
 	}
 
 
 	//insere o novo dado fornecido na lista, numa posicao logica informada 
-	public void inserir(int posicao, Object dado) {
+	public void inserir(int posicao, Object dado) throws Exception {
 		if(!estaCheia()) {
 			if((posicao >= 0) && (posicao <= quantidade)) {
 				NoDuplo noTemporario = new NoDuplo();
@@ -76,15 +76,15 @@ public class ListaDinamica implements Listavel {
 
 				quantidade++;
 	        } else {
-            	System.out.println("Posicao Inválida!");
+            	throw new MyException("Posicao Inválida!");
             }
 		} else {
-			System.out.println("Lista Cheia!");
+			throw new MyException("Lista Cheia!");
 		}
 	}
 	
 	//retorna o elemento que está numa posicao logica informada
-	public Object selecionarUm(int posicao) {
+	public Object selecionarUm(int posicao) throws Exception {
 		Object elementoTemporario = null;
 		if (!estaVazia()) {
 			if ((posicao >= 0) && (posicao < quantidade)) {
@@ -99,17 +99,17 @@ public class ListaDinamica implements Listavel {
 				///////////////////////////////
 				elementoTemporario = ponteiroAuxiliar.getDado();
             } else {
-                System.out.println("Posição Inválida!");
+               throw new MyException("Posição Inválida!");
             }
 		} else {
-			System.out.println("Lista Vazia!");	
+			throw new MyException("Lista Vazia!");	
 		}
 		return elementoTemporario;
 	}
 	
 	//substitui o elemento de uma posicao logica informada,
 	//pelo novo elemento fornecido
-	public void atualizar(int posicao, Object novoDado) {
+	public void atualizar(int posicao, Object novoDado) throws Exception {
 		if (!estaVazia()) {
 			if ((posicao >= 0) && (posicao < quantidade)) {
 				////////////////////////////////
@@ -123,15 +123,15 @@ public class ListaDinamica implements Listavel {
 				///////////////////////////////
 				ponteiroAuxiliar.setDado(novoDado);
             } else {
-                System.out.println("Posição Inválida!");
+                throw new MyException("Posição Inválida!");
             }
 		} else {
-			System.out.println("Lista Vazia!");	
+			throw new MyException("Lista Vazia!");	
 		}
 	}
 	
 	//remove o elemento de uma posicao logica informada
-	public Object apagar(int posicao) {
+	public Object apagar(int posicao) throws Exception {
 		Object noTemporario = null;
 		if (!estaVazia()) {
 			if ((posicao >=0) && (posicao < quantidade)) {
@@ -164,10 +164,10 @@ public class ListaDinamica implements Listavel {
 
 				quantidade--;
             } else {
-                System.out.println("Posicão Inválida!");
+               throw new MyException("Posicão Inválida!");
             }
 		} else {
-			System.out.println("Lista Vazia!");	
+			throw new MyException("Lista Vazia!");	
 		}	
 		return noTemporario;	
 	}

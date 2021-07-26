@@ -1,5 +1,5 @@
 public class ListaDinamicaPrincipal {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		Listavel lista = new ListaDinamica();
 		lista.anexar("A");
 		System.out.println(lista.imprimir());
