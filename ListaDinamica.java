@@ -16,8 +16,13 @@ public class ListaDinamica implements Listavel {
 		ponteiroFim = null;
 	}
 
-	//anexar
-	public void anexar(Object dado) throws Exception{
+	/*
+	 * Adiciona um elemento ao fim da lista.
+	 * Params: Recebe o dado a ser inserido na lista.
+	 * Return: Não retorna nada.
+	 * Exception: Caso se tente inserir um elemento na lista e ela já está cheia.
+	 */
+	public void anexar(Object dado) throws OverflowException {
 		if(!estaCheia()) {
 			NoDuplo noTemporario = new NoDuplo();
 			noTemporario.setDado(dado);
@@ -31,13 +36,17 @@ public class ListaDinamica implements Listavel {
 
 			quantidade++;
 		} else {
-			throw new MyException("Fila Cheia!");
+			throw new OverflowException("Fila Cheia!");
 		}
 	}
 
-
-	//insere o novo dado fornecido na lista, numa posicao logica informada 
-	public void inserir(int posicao, Object dado) throws Exception {
+	/*
+	 * Insere um elemento numa posicao específica da lista.
+	 * Params: Recebe o dado a ser inserido na lista e a sua posição.
+	 * Return: Não retorna nada.
+	 * Exception: Caso tente inserir um elemento na lista e ela já está cheia.
+	 */
+	public void inserir(int posicao, Object dado) throws OverflowException {
 		if(!estaCheia()) {
 			if((posicao >= 0) && (posicao <= quantidade)) {
 				NoDuplo noTemporario = new NoDuplo();
@@ -76,15 +85,20 @@ public class ListaDinamica implements Listavel {
 
 				quantidade++;
 	        } else {
-            	throw new MyException("Posicao Inválida!");
+            	System.err.println("Indice Inválido");
             }
 		} else {
-			throw new MyException("Lista Cheia!");
+			throw new OverflowException("Lista Cheia!");
 		}
 	}
-	
-	//retorna o elemento que está numa posicao logica informada
-	public Object selecionarUm(int posicao) throws Exception {
+
+	/*
+	 * Seleciona o elemento que está numa posicao logica informada.
+	 * Params: Recebe uma posição de um objeto da lista.
+	 * Return: Retorna o objeto da posição indicada.
+	 * Excetion: Não gera exceção.
+	 */
+	public Object selecionarUm(int posicao) {
 		Object elementoTemporario = null;
 		if (!estaVazia()) {
 			if ((posicao >= 0) && (posicao < quantidade)) {
@@ -99,17 +113,21 @@ public class ListaDinamica implements Listavel {
 				///////////////////////////////
 				elementoTemporario = ponteiroAuxiliar.getDado();
             } else {
-               throw new MyException("Posição Inválida!");
+               System.err.println("Indice Inválido");
             }
 		} else {
-			throw new MyException("Lista Vazia!");	
+			System.err.println("Lista Vazia");	
 		}
 		return elementoTemporario;
 	}
-	
-	//substitui o elemento de uma posicao logica informada,
-	//pelo novo elemento fornecido
-	public void atualizar(int posicao, Object novoDado) throws Exception {
+
+	/*
+	 * Atualiza o elemento de uma posicao logica informada por um novo.
+	 * Params: Recebe uma posição de um objeto da lista, e o novo objeto.
+	 * Return: Não retorno nada.
+	 * Excetion: Não gera exceção.
+	 */	
+	public void atualizar(int posicao, Object novoDado) {
 		if (!estaVazia()) {
 			if ((posicao >= 0) && (posicao < quantidade)) {
 				////////////////////////////////
@@ -123,15 +141,20 @@ public class ListaDinamica implements Listavel {
 				///////////////////////////////
 				ponteiroAuxiliar.setDado(novoDado);
             } else {
-                throw new MyException("Posição Inválida!");
+               System.err.println("Indice Inválido");
             }
 		} else {
-			throw new MyException("Lista Vazia!");	
+			System.err.println("Lista Vazia");
 		}
 	}
 	
-	//remove o elemento de uma posicao logica informada
-	public Object apagar(int posicao) throws Exception {
+	/*
+	 * Apaga o elemento de uma posicao logica informada.
+	 * Params: Recebe uma posição de um objeto da lista.
+	 * Return: O objeto apagado.
+	 * Excetion: Caso tente-se apagar um elemento de uma lista vazia.
+	 */	 
+	public Object apagar(int posicao) throws UnderflowException {
 		Object noTemporario = null;
 		if (!estaVazia()) {
 			if ((posicao >=0) && (posicao < quantidade)) {
@@ -164,25 +187,40 @@ public class ListaDinamica implements Listavel {
 
 				quantidade--;
             } else {
-               throw new MyException("Posicão Inválida!");
-            }
+               System.err.println("Indice Inválido");
+            } 
 		} else {
-			throw new MyException("Lista Vazia!");	
+			throw new UnderflowException("Lista Vazia!");	
 		}	
 		return noTemporario;	
 	}
 
-	//estaCheia
+	/*
+	 * Informa se a lista está cheia.
+	 * Params: Não recebe nada.
+	 * Return: Um valor lógico dizendo se a lista está cheia ou não.
+	 * Excetion: Não gera exceção.
+	 */	
 	public boolean estaCheia() {
 		return (quantidade == tamanho);
 	}
 
-	//estaVazia
+	/*
+	 * Informa se a lista está vazia.
+	 * Params: Não recebe nada.
+	 * Return: Um valor lógico dizendo se a lista está vazia ou não.
+	 * Excetion: Não gera exceção.
+	 */	
 	public boolean estaVazia() {
 		return (quantidade == 0);
 	}
 
-	//paraTexto
+	/*
+	 * Imprime o conteúdo da lista.
+	 * Params: Não recebe nada.
+	 * Return: Uma string com todos os elementos da lista separados por ",".
+	 * Excetion: Não gera exceção.
+	 */	
 	public String imprimir() {
 		NoDuplo ponteiroAuxiliar = ponteiroInicio;
 		String conteudo = "[";
