@@ -57,13 +57,11 @@ public class ListaDinamica implements Listavel {
 				//auxiliar ira parar no nodo subsequente ao nodo que devera 
 				//ser inserido				
 				NoDuplo ponteiroAnterior = null;
-				NoDuplo ponteiroAuxiliar = ponteiroInicio;
-				NoDuplo ponteiroProximo = ponteiroAuxiliar;
+				NoDuplo ponteiroProximo = ponteiroInicio;
 
 				for (int i = 0; i < posicao; i++) {
-					ponteiroAnterior = ponteiroAuxiliar;
-					ponteiroAuxiliar = ponteiroAuxiliar.getProximo();
-					ponteiroProximo = ponteiroAuxiliar;
+					ponteiroAnterior = ponteiroProximo;
+					ponteiroProximo = ponteiroProximo.getProximo();
 				}
 
 				if (ponteiroAnterior != null) {
@@ -74,7 +72,7 @@ public class ListaDinamica implements Listavel {
 				}
 
 				if (ponteiroProximo != null) {
-				ponteiroProximo.setAnterior(noTemporario);
+					ponteiroProximo.setAnterior(noTemporario);
 				//se o proximo é nulo é pq a insercao está sendo no fim (append)
 				} else {
 					ponteiroFim = noTemporario;
